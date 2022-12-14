@@ -1,2 +1,1 @@
-# api_rest
-API REST
+<h1 align="center">Book Shop API 📕</h1>
