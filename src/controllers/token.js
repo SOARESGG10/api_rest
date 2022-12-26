@@ -1,6 +1,6 @@
 import Jwt from "jsonwebtoken";
 import User from "../models/User";
-import { createError } from "../middlewares/errors";
+import { createError, treatErrors } from "../middlewares/errors";
 
 const Store = async (req, res) => {
   try {
@@ -27,7 +27,7 @@ const Store = async (req, res) => {
     });
     return res.json({ token });
   } catch (err) {
-    return res.json(err);
+    return res.json(treatErrors(err));
   }
 };
 

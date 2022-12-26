@@ -10,7 +10,7 @@ const Index = async (req, res) => {
     });
     return res.json(books);
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(treatErrors(err));
   }
 };
 
@@ -28,7 +28,7 @@ const Store = async (req, res) => {
     });
     return res.json({ title, year, description, pages, author });
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(treatErrors(err));
   }
 };
 
