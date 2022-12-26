@@ -34,6 +34,14 @@ npm run dev
 
 - Para o realizar o CRUD das rotas "users" e "books" é necessário realizar a autenticação via token na rota "token".
 
+![Token](./public/img/token.png)
+
+## 🎲 | Configuração do Banco de Dados
+
+![Database](./public/img/database_config.png)
+
+**OBS**: É necessário realizar a criação do schema **bookshop** em seu banco de dados.
+
 ## 💡| Recomendações:
 
 - Utilização do **Insomnia** ou **Postman**
