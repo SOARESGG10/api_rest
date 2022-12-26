@@ -1,4 +1,5 @@
 import Sequelize, { Model } from "sequelize";
+
 import bcryptjs from "bcrypt";
 
 export default class User extends Model {
@@ -7,6 +8,9 @@ export default class User extends Model {
       {
         name: {
           type: Sequelize.STRING,
+          unique: {
+            msg: "Já existe um usuário com esse nome. Informe outro nome.",
+          },
           validate: {
             notEmpty: {
               msg: "É necessário informar o seu nome.",
@@ -23,7 +27,7 @@ export default class User extends Model {
               msg: "É necessário informar o seu nome.",
             },
             isEmail: {
-              msg: "E-mail inválido",
+              msg: "E-mail inválido. Por favor informe um e-mail válido.",
             },
           },
         },
@@ -36,18 +40,17 @@ export default class User extends Model {
           defaultValue: "",
           validate: {
             len: {
-              args: [],
-              msg: "O campo senha deve ter entre 8 a 25 caracteres",
+              args: [8, 25],
+              msg: "A sua senha deve ter entre 8 a 25 caracteres.",
             },
           },
         },
       },
       { sequelize }
     );
-
-    this.addHook("beforeSave", async (user) => {
-      if (user.password) {
-        user.password_hash = await bcryptjs.hash(user.password, 8);
+    this.addHook("beforeSave", async (athor) => {
+      if (athor.password) {
+        athor.password_hash = await bcryptjs.hash(athor.password, 8);
       }
     });
 
@@ -56,5 +59,9 @@ export default class User extends Model {
 
   passwordIsValid(password) {
     return bcryptjs.compare(password, this.password_hash);
+  }
+
+  static associate(models) {
+    this.hasMany(models.Book, { foreignKey: "user_id" });
   }
 }
