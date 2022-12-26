@@ -1,15 +1,5 @@
 import User from "../models/User";
-
-// const Index = async (req, res) => {
-//   try {
-//     const users = await User.findAll({
-//       attributes: ["id", "name", "email"],
-//     });
-//     return res.json(users);
-//   } catch (err) {
-//     return res.status(400).json(null);
-//   }
-// };
+import { treatErrors, createError } from "../middlewares/errors.js";
 
 const Store = async (req, res) => {
   try {
@@ -17,17 +7,17 @@ const Store = async (req, res) => {
     const { name, email, password } = user;
     return res.json({ name, email, password });
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(treatErrors(err));
   }
 };
 
 const Update = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user_id;
     const data = await User.findByPk(id);
 
     if (!data) {
-      return res.status(400).json({ errors: ["Este usuário não existe."] });
+      return res.status(400).json(createError("Este usuário não existe."));
     }
 
     const user = await data.update(req.body);
@@ -35,22 +25,25 @@ const Update = async (req, res) => {
 
     return res.json({ name, email, password });
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(treatErrors(err));
   }
 };
 
 const Delete = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user_id;
     const user = await User.findByPk(id);
 
     if (!user) {
-      return res.status(400).json({ errors: ["Este usuário não existe."] });
+      return res.status(400).json(createError("Este usuário não existe."));
     }
-    await user.destroy(req.body);
-    return res.json(null);
+
+    // await author.update({ active: false });
+    await user.destroy();
+
+    return res.json("Usuário deletado com sucesso.");
   } catch (err) {
-    return res.status(400).json(null);
+    return res.status(400).json(treatErrors(err));
   }
 };
 
