@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { Index, Store, Update, Delete } from "../controllers/user";
+import { Store, Update, Delete } from "../controllers/user";
+import loginRequired from "../middlewares/required_login";
 
 const routes = Router();
 
-routes.get("/users/", Index);
-routes.post("/users/", Store);
-routes.put("/users/:id?", Update);
-routes.delete("/users/:id?", Delete);
+routes.post("/user/", Store);
+routes.put("/user/", loginRequired, Update);
+routes.delete("/user/", loginRequired, Delete);
 
-export { routes as routesUsers };
+export { routes as routesUser };
