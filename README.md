@@ -46,9 +46,6 @@ npm run dev
 
 - Utilização do **Insomnia** ou **Postman**
 
-![Insomnia](./public/img/insomnia.png)
-_Utilização do Insomnia para a realização das requisições._
-
 ## 🔗 | Ferramentas:
 
 [![NodeJS](./public/img/Node.svg)](https://nodejs.org/en/download/)
