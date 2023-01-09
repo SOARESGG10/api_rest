@@ -27,20 +27,22 @@ npm i
 ## 🔰 | Iniciar a API:
 
 ```
-npm run dev
+npm start
 ```
 
 ## 📡 | Utilização:
 
-- Para o realizar o CRUD das rotas "users" e "books" é necessário realizar a autenticação via token na rota "token".
+- Para o realizar o CRUD das rotas "users" e "books" é necessário realizar a criação de um novo usuário na rota "user" e a autenticação via token na rota "token".
 
-![Token](./public/img/token.png)
 
 ## 🎲 | Configuração do Banco de Dados
 
 ![Database](./public/img/database_config.png)
 
-**OBS**: É necessário realizar a criação do schema **bookshop** em seu banco de dados.
+**OBS**:
+
+- É necessário criar um arquivo **.env** e efetuar a configuração acima na pasta **raiz** do projeto.
+- É necessário realizar a criação do schema em seu banco de dados.
 
 ## 💡| Recomendações:
 
