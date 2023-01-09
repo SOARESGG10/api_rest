@@ -1,4 +1,5 @@
 node_modules
 .editorconfig
 dist
+.gitignore
 .env
